@@ -1,0 +1,11 @@
+task_definition:
+    TaskA:
+      file_name: task_a
+      category: category_a
+      method: perform
+      args: []
+    TaskB:
+      file_name: task_b
+      category: category_b
+      method: perform
+      args: []
