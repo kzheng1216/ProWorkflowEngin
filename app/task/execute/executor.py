@@ -3,18 +3,18 @@ import yaml
 import importlib
 import os
 
-from task.task_definition import TaskDefinition
+from task.execute.task_definition import TaskDefinition
 
 
 
 class TaskExecutor:
     tasks = TaskDefinition()
 
-    def executor(self):
+    def executor(self, plan):
         print("Task Definitions: ", json.dumps(self.tasks.task_map, indent=4))
         for t_name, t_definition in self.tasks.task_map.items():
             method_name = t_definition['method']
-            module_name = f'task.category.{t_definition['category']}.{t_definition['file_name']}'
+            module_name = f'task.plugins.{t_definition['category']}.{t_definition['file_name']}'
         
             # 动态加载类
             task_module = importlib.import_module(module_name) 

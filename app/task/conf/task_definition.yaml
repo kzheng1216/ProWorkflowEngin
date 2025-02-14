@@ -1,0 +1,20 @@
+task_definition:
+  - id: task_a
+    name: Task A
+    category: category_a
+    description: Task A
+    version: 1.0.0
+    # file_name: task.plugins.category_a.task_a.py
+    command: app/task/plugins/category_a/task_a.py
+    method: perform
+    args: []
+    timeout: 15m
+  - id: task_b
+    name: Task B
+    category: category_b
+    description: Task B
+    version: 1.0.0
+    command: app/task/plugins/category_b/task_b.py
+    method: perform
+    args: []
+    timeout: 15m

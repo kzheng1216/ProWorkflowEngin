@@ -1,0 +1,6 @@
+profile: plan_01a
+description: "Sample plan 01a"
+plugins:
+  - task_a
+  - task_b
+  - task_a
