@@ -1,20 +1,25 @@
 task_definition:
-  - id: task_a
+  - id: TaskDefault
+    name: Default Task
+    category: default
+    description: Default Task
+    version: 1.0.0
+    command: task_default.py
+    args: []
+    timeout: 15m
+  - id: TaskA
     name: Task A
     category: category_a
     description: Task A
     version: 1.0.0
-    # file_name: task.plugins.category_a.task_a.py
-    command: app/task/plugins/category_a/task_a.py
-    method: perform
+    command: category_a/task_a.py
     args: []
     timeout: 15m
-  - id: task_b
+  - id: TaskB
     name: Task B
     category: category_b
     description: Task B
     version: 1.0.0
-    command: app/task/plugins/category_b/task_b.py
-    method: perform
+    command: category_b/task_b.py
     args: []
     timeout: 15m
