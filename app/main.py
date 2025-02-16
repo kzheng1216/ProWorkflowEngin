@@ -1,6 +1,5 @@
 import json
-from task.execute.plan import Plan
-from task.execute.executor import TaskExecutor
+from task.execute.task_executor import TaskExecutor
 from task.common.utils import SERVICE_NAME
 from task.common.logger import get_logger
 
@@ -8,8 +7,7 @@ logger = get_logger(SERVICE_NAME)
 
 # 主函数
 if __name__ == "__main__":
-    plan = Plan('profile_01a')
-    executor = TaskExecutor(plan)
+    executor = TaskExecutor('profile_01a')
     executor.executor()
-    logger.info(json.dumps(plan.get_result(), indent=4))
+    logger.info(f'Result Message:  {json.dumps(executor.get_result(), indent=4)}')
  
