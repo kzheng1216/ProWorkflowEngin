@@ -30,21 +30,42 @@ class TaskExecutor:
             task_result = self.executor_sequential(task_result)
         else:
             task_result = self.executor_parallel(task_result)
+            # result_map = asyncio.run(self.executor_parallel(task_result))
+            # print(result_map)
+        logger.info(f'task_result: {task_result}')
         self.plan.result(task_result)
 
     def executor_sequential(self, task_result: list) -> list:
         for t in task_result:
             t['result_message'] = self.executor_module(t)
         return task_result
-
+    
     async def executor_parallel(self, task_result: list):
-        parallel_tasks = [self.executor_module_async(t) for t in task_result]
-        result_messages = await asyncio.gather(*parallel_tasks)
-        print(result_messages)
+        tasks = []
+        m = {}
+        for t in task_result:
+            fut = asyncio.Future()
+            m[t['id']] = fut
+            coroutine = self.executor_module_async(fut, t)
+            tasks.append(coroutine)
+        
+        try:
+            done, pending = await asyncio.wait(tasks)
+            for task in done:
+                fut = task.result()
+                print(f"Task result: {fut.result()}")
+        except Exception as e:  
+            logger.error(f'executor_parallel error: {e}')
+        
+        for t in task_result:
+            t['result_message'] = m[t['id']].result()
+        
         return task_result
 
-    async def executor_module_async(self, task_data: dict) -> dict:
-        return self.executor_module(task_data)
+    async def executor_module_async(self, fut, task_data: dict) -> dict:
+        result_message = self.executor_module(task_data)    
+        fut.set_result(result_message)
+        return result_message
     
     def executor_module(self, task_data: dict) -> dict:
         module_name = task_data['command']
