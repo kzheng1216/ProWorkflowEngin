@@ -1,9 +1,9 @@
 import json
-from task.common.utils import SERVICE_NAME
-from task.common.logger import get_logger
 from task.execute.plan import Plan
 from task.execute.executor import TaskExecutor
-    
+from task.common.utils import SERVICE_NAME
+from task.common.logger import get_logger
+
 logger = get_logger(SERVICE_NAME)
 
 # 主函数

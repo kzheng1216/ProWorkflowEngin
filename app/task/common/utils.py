@@ -15,3 +15,8 @@ class State(Enum):
     SUCCESS = "SUCCESS"
     FAIL = "FAIL"
     ERROR = "ERROR"
+
+
+class ExecutionMode(Enum):
+    SEQUENTIAL = "sequential"
+    PARALLEL = "parallel"

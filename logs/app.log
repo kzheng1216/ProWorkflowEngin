@@ -1,4 +1,4 @@
-2025-02-14 21:44:17 - INFO - Load task config: {
+2025-02-16 19:17:11 - INFO - Load task config: {
     "Task": {
         "TaskDefault": {
             "id": "TaskDefault",
@@ -7,8 +7,7 @@
             "description": "Default Task",
             "version": "1.0.0",
             "command": "task_default.py",
-            "args": [],
-            "timeout": "15m"
+            "args": []
         },
         "TaskA": {
             "id": "TaskA",
@@ -17,8 +16,7 @@
             "description": "Task A",
             "version": "1.0.0",
             "command": "category_a/task_a.py",
-            "args": [],
-            "timeout": "15m"
+            "args": []
         },
         "TaskB": {
             "id": "TaskB",
@@ -27,14 +25,14 @@
             "description": "Task B",
             "version": "1.0.0",
             "command": "category_b/task_b.py",
-            "args": [],
-            "timeout": "15m"
+            "args": []
         }
     },
     "Profile": {
         "profile_01a": {
             "profile": "profile_01a",
             "description": "Sample plan 01a",
+            "execution-mode": "parallel",
             "plugins": [
                 "TaskA",
                 "TaskB",
@@ -44,14 +42,117 @@
         "default": {
             "profile": "default",
             "description": "default plan",
+            "execution-mode": "sequential",
             "plugins": null
         }
     }
 }
-2025-02-14 21:44:17 - INFO - Task A is running
-2025-02-14 21:44:17 - INFO - Task B is running
-2025-02-14 21:44:17 - INFO - Task A is running
-2025-02-14 21:44:17 - INFO - {
+2025-02-16 19:17:11 - INFO - execution_mode: parallel
+2025-02-16 19:18:47 - INFO - Load task config: {
+    "Task": {
+        "TaskDefault": {
+            "id": "TaskDefault",
+            "name": "Default Task",
+            "category": "default",
+            "description": "Default Task",
+            "version": "1.0.0",
+            "command": "task_default.py",
+            "args": []
+        },
+        "TaskA": {
+            "id": "TaskA",
+            "name": "Task A",
+            "category": "category_a",
+            "description": "Task A",
+            "version": "1.0.0",
+            "command": "category_a/task_a.py",
+            "args": []
+        },
+        "TaskB": {
+            "id": "TaskB",
+            "name": "Task B",
+            "category": "category_b",
+            "description": "Task B",
+            "version": "1.0.0",
+            "command": "category_b/task_b.py",
+            "args": []
+        }
+    },
+    "Profile": {
+        "profile_01a": {
+            "profile": "profile_01a",
+            "description": "Sample plan 01a",
+            "execution-mode": "parallel",
+            "plugins": [
+                "TaskA",
+                "TaskB",
+                "TaskA"
+            ]
+        },
+        "default": {
+            "profile": "default",
+            "description": "default plan",
+            "execution-mode": "sequential",
+            "plugins": null
+        }
+    }
+}
+2025-02-16 19:18:47 - INFO - execution_mode: parallel
+2025-02-16 19:18:47 - INFO - ---==========================0
+2025-02-16 19:23:59 - INFO - Load task config: {
+    "Task": {
+        "TaskDefault": {
+            "id": "TaskDefault",
+            "name": "Default Task",
+            "category": "default",
+            "description": "Default Task",
+            "version": "1.0.0",
+            "command": "task_default.py",
+            "args": []
+        },
+        "TaskA": {
+            "id": "TaskA",
+            "name": "Task A",
+            "category": "category_a",
+            "description": "Task A",
+            "version": "1.0.0",
+            "command": "category_a/task_a.py",
+            "args": []
+        },
+        "TaskB": {
+            "id": "TaskB",
+            "name": "Task B",
+            "category": "category_b",
+            "description": "Task B",
+            "version": "1.0.0",
+            "command": "category_b/task_b.py",
+            "args": []
+        }
+    },
+    "Profile": {
+        "profile_01a": {
+            "profile": "profile_01a",
+            "description": "Sample plan 01a",
+            "execution-mode": "sequential",
+            "plugins": [
+                "TaskA",
+                "TaskB",
+                "TaskA"
+            ]
+        },
+        "default": {
+            "profile": "default",
+            "description": "default plan",
+            "execution-mode": "sequential",
+            "plugins": null
+        }
+    }
+}
+2025-02-16 19:23:59 - INFO - execution_mode: sequential
+2025-02-16 19:23:59 - INFO - Task A is running
+2025-02-16 19:23:59 - INFO - Task B is running
+2025-02-16 19:23:59 - INFO - Task A is running
+2025-02-16 19:23:59 - INFO - {
     "status": "SUCCESS",
     "tasks": [
         {
@@ -62,7 +163,6 @@
             "version": "1.0.0",
             "command": "category_a/task_a.py",
             "args": [],
-            "timeout": "15m",
             "result_message": {
                 "status": "SUCCESS",
                 "message": "Task A is done"
@@ -76,7 +176,6 @@
             "version": "1.0.0",
             "command": "category_b/task_b.py",
             "args": [],
-            "timeout": "15m",
             "result_message": {
                 "status": "SUCCESS",
                 "message": "Task A is done"
@@ -90,7 +189,6 @@
             "version": "1.0.0",
             "command": "category_a/task_a.py",
             "args": [],
-            "timeout": "15m",
             "result_message": {
                 "status": "SUCCESS",
                 "message": "Task A is done"

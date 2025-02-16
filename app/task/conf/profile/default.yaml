@@ -1,3 +1,4 @@
 profile: default
 description: "default plan"
+execution-mode: sequential # sequential/parallel
 plugins:

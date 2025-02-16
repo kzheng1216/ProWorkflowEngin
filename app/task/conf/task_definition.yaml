@@ -6,7 +6,6 @@ task_definition:
     version: 1.0.0
     command: task_default.py
     args: []
-    timeout: 15m
   - id: TaskA
     name: Task A
     category: category_a
@@ -14,7 +13,6 @@ task_definition:
     version: 1.0.0
     command: category_a/task_a.py
     args: []
-    timeout: 15m
   - id: TaskB
     name: Task B
     category: category_b
@@ -22,4 +20,3 @@ task_definition:
     version: 1.0.0
     command: category_b/task_b.py
     args: []
-    timeout: 15m

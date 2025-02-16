@@ -3,7 +3,7 @@ import yaml
 import os
 
 from task.common.logger import get_logger
-from task.common.utils import SERVICE_NAME
+from task.common.utils import SERVICE_NAME, ExecutionMode
 logger = get_logger(SERVICE_NAME)
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -58,6 +58,11 @@ class TaskConfig:
             task_definitions.append(self.config['Task'][plugin])
         return task_definitions
 
+    def get_execution_mode_by_profile_name(self, profile_name: str) -> ExecutionMode:
+        profile_inst = self.config['Profile'][profile_name]   
+        if not profile_inst or not profile_inst['execution-mode'] or profile_inst['execution-mode'] == ExecutionMode.SEQUENTIAL.value:
+            return ExecutionMode.SEQUENTIAL
+        return ExecutionMode.PARALLEL
 
 if __name__ == "__main__":
     m = TaskConfig()
