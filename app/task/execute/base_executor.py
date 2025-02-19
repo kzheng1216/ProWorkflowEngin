@@ -28,20 +28,29 @@ class BaseExecutor:
         self.execution_mode = self.config.get_execution_mode_by_profile_name(self.profile)
 
     def executor_module(self, task_data: dict) -> dict:
+        logger.info(f'---------------------------------------------------------')
+        task_id = task_data["id"]
+        logger.info(f'--- [Execute Task]: {task_id}')
+        # logger.info(f'task_data: {json.dumps(task_data, indent=4)}')
         module_name = task_data["command"]
+        args_data = task_data["args"]
 
         # Load class
         module_name = module_name.replace("/", ".").replace(".py", "")
         task_module = importlib.import_module(f"task.plugins.{module_name}")
         task_class = getattr(task_module, task_data["id"])
+        logger.info(f'--- [Task Class]: {task_class}')
 
         # create instance
         task_instance = task_class()
 
-        # call method
+        # # call method
         method = getattr(task_instance, "perform")
-        method()
-        return task_instance.result_message
+        method(args_data)
+        result_message = deepcopy(task_instance.result_message)
+        
+        logger.info(f'[Result Message]: {json.dumps(result_message, indent=4)}')
+        return result_message
     
     def result(self):
         if not self.task_list:

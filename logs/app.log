@@ -1,4 +1,4 @@
-2025-02-16 23:43:57 - INFO - Load task config: {
+2025-02-19 13:54:42 - INFO - Load task config: {
     "Task": {
         "TaskDefault": {
             "id": "TaskDefault",
@@ -7,7 +7,10 @@
             "description": "Default Task",
             "version": "1.0.0",
             "command": "task_default.py",
-            "args": []
+            "args": [
+                "1",
+                "2"
+            ]
         },
         "TaskA": {
             "id": "TaskA",
@@ -16,7 +19,10 @@
             "description": "Task A",
             "version": "1.0.0",
             "command": "category_a/task_a.py",
-            "args": []
+            "args": [
+                "11",
+                "12"
+            ]
         },
         "TaskB": {
             "id": "TaskB",
@@ -29,111 +35,6 @@
         }
     },
     "Profile": {
-        "default": {
-            "profile": "default",
-            "description": "default plan",
-            "execution-mode": "sequential",
-            "plugins": null
-        },
-        "profile_01a": {
-            "profile": "profile_01a",
-            "description": "Sample plan 01a",
-            "execution-mode": "parallel",
-            "plugins": [
-                "TaskA",
-                "TaskB",
-                "TaskA"
-            ]
-        }
-    }
-}
-2025-02-16 23:43:57 - INFO - === Profile: profile_01a
-2025-02-16 23:43:57 - INFO - === Execution_mode: parallel
-2025-02-16 23:43:57 - DEBUG - Using proactor: IocpProactor
-2025-02-16 23:43:57 - INFO - Task A is running
-2025-02-16 23:43:57 - INFO - Task B is running
-2025-02-16 23:43:57 - INFO - Task A is running
-2025-02-16 23:43:57 - INFO - Result Message:  {
-    "status": "SUCCESS",
-    "tasks": [
-        {
-            "id": "TaskA",
-            "name": "Task A",
-            "category": "category_a",
-            "description": "Task A",
-            "version": "1.0.0",
-            "command": "category_a/task_a.py",
-            "args": [],
-            "result_message": {
-                "status": "SUCCESS",
-                "message": "Task A is done"
-            }
-        },
-        {
-            "id": "TaskB",
-            "name": "Task B",
-            "category": "category_b",
-            "description": "Task B",
-            "version": "1.0.0",
-            "command": "category_b/task_b.py",
-            "args": [],
-            "result_message": {
-                "status": "SUCCESS",
-                "message": "Task A is done"
-            }
-        },
-        {
-            "id": "TaskA",
-            "name": "Task A",
-            "category": "category_a",
-            "description": "Task A",
-            "version": "1.0.0",
-            "command": "category_a/task_a.py",
-            "args": [],
-            "result_message": {
-                "status": "SUCCESS",
-                "message": "Task A is done"
-            }
-        }
-    ]
-}
-2025-02-16 23:44:10 - INFO - Load task config: {
-    "Task": {
-        "TaskDefault": {
-            "id": "TaskDefault",
-            "name": "Default Task",
-            "category": "default",
-            "description": "Default Task",
-            "version": "1.0.0",
-            "command": "task_default.py",
-            "args": []
-        },
-        "TaskA": {
-            "id": "TaskA",
-            "name": "Task A",
-            "category": "category_a",
-            "description": "Task A",
-            "version": "1.0.0",
-            "command": "category_a/task_a.py",
-            "args": []
-        },
-        "TaskB": {
-            "id": "TaskB",
-            "name": "Task B",
-            "category": "category_b",
-            "description": "Task B",
-            "version": "1.0.0",
-            "command": "category_b/task_b.py",
-            "args": []
-        }
-    },
-    "Profile": {
-        "default": {
-            "profile": "default",
-            "description": "default plan",
-            "execution-mode": "sequential",
-            "plugins": null
-        },
         "profile_01a": {
             "profile": "profile_01a",
             "description": "Sample plan 01a",
@@ -143,15 +44,50 @@
                 "TaskB",
                 "TaskA"
             ]
+        },
+        "default": {
+            "profile": "default",
+            "description": "default plan",
+            "execution-mode": "sequential",
+            "plugins": null
         }
     }
 }
-2025-02-16 23:44:10 - INFO - === Profile: profile_01a
-2025-02-16 23:44:10 - INFO - === Execution_mode: sequential
-2025-02-16 23:44:10 - INFO - Task A is running
-2025-02-16 23:44:10 - INFO - Task B is running
-2025-02-16 23:44:10 - INFO - Task A is running
-2025-02-16 23:44:10 - INFO - Result Message:  {
+2025-02-19 13:54:42 - INFO - ### === [Profile]: profile_01a | [Execution Mode]: sequential
+2025-02-19 13:54:42 - INFO - ---------------------------------------------------------
+2025-02-19 13:54:42 - INFO - --- [Execute Task]: TaskA
+2025-02-19 13:54:42 - INFO - --- [Task Class]: <class 'task.plugins.category_a.task_a.TaskA'>
+2025-02-19 13:54:42 - INFO - Task A is running. args: ['11', '12']
+2025-02-19 13:54:42 - INFO - [Result Message]: {
+    "status": "SUCCESS",
+    "message": "Task A is done",
+    "data": {
+        "return_value": "11 12 "
+    }
+}
+2025-02-19 13:54:42 - INFO - ---------------------------------------------------------
+2025-02-19 13:54:42 - INFO - --- [Execute Task]: TaskB
+2025-02-19 13:54:42 - INFO - --- [Task Class]: <class 'task.plugins.category_b.task_b.TaskB'>
+2025-02-19 13:54:42 - INFO - Task B is running. args: []
+2025-02-19 13:54:42 - INFO - [Result Message]: {
+    "status": "SUCCESS",
+    "message": "Task B is done",
+    "data": {
+        "return_value": "234"
+    }
+}
+2025-02-19 13:54:42 - INFO - ---------------------------------------------------------
+2025-02-19 13:54:42 - INFO - --- [Execute Task]: TaskA
+2025-02-19 13:54:42 - INFO - --- [Task Class]: <class 'task.plugins.category_a.task_a.TaskA'>
+2025-02-19 13:54:42 - INFO - Task A is running. args: ['11', '12']
+2025-02-19 13:54:42 - INFO - [Result Message]: {
+    "status": "SUCCESS",
+    "message": "Task A is done",
+    "data": {
+        "return_value": "11 12 "
+    }
+}
+2025-02-19 13:54:42 - INFO - Result Message:  {
     "status": "SUCCESS",
     "tasks": [
         {
@@ -161,10 +97,16 @@
             "description": "Task A",
             "version": "1.0.0",
             "command": "category_a/task_a.py",
-            "args": [],
+            "args": [
+                "11",
+                "12"
+            ],
             "result_message": {
                 "status": "SUCCESS",
-                "message": "Task A is done"
+                "message": "Task A is done",
+                "data": {
+                    "return_value": "11 12 "
+                }
             }
         },
         {
@@ -177,7 +119,10 @@
             "args": [],
             "result_message": {
                 "status": "SUCCESS",
-                "message": "Task A is done"
+                "message": "Task B is done",
+                "data": {
+                    "return_value": "234"
+                }
             }
         },
         {
@@ -187,10 +132,16 @@
             "description": "Task A",
             "version": "1.0.0",
             "command": "category_a/task_a.py",
-            "args": [],
+            "args": [
+                "11",
+                "12"
+            ],
             "result_message": {
                 "status": "SUCCESS",
-                "message": "Task A is done"
+                "message": "Task A is done",
+                "data": {
+                    "return_value": "11 12 "
+                }
             }
         }
     ]

@@ -13,8 +13,7 @@ logger = get_logger(SERVICE_NAME)
 
 class TaskExecutor(BaseExecutor):
     def executor(self):
-        logger.info(f"=== Profile: {self.profile}")
-        logger.info(f"=== Execution_mode: {self.execution_mode.value}")
+        logger.info(f"### === [Profile]: {self.profile} | [Execution Mode]: {self.execution_mode.value}")
         if self.execution_mode == ExecutionMode.SEQUENTIAL:
             self.executor_sequential()
         else:

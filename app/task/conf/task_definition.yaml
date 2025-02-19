@@ -5,14 +5,14 @@ task_definition:
     description: Default Task
     version: 1.0.0
     command: task_default.py
-    args: []
+    args: ['1', '2']
   - id: TaskA
     name: Task A
     category: category_a
     description: Task A
     version: 1.0.0
     command: category_a/task_a.py
-    args: []
+    args: ['11', '12']
   - id: TaskB
     name: Task B
     category: category_b
