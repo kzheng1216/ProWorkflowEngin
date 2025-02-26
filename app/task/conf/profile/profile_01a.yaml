@@ -3,5 +3,3 @@ description: "Sample plan 01a"
 execution-mode: parallel # sequential/parallel
 plugins:
   - TaskA
-  - TaskB
-  - TaskA

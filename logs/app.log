@@ -1,17 +1,5 @@
-2025-02-26 16:39:05 - INFO - Load task config: {
+2025-02-26 17:03:57 - INFO - Load task config: {
     "Task": {
-        "TaskDefault": {
-            "id": "TaskDefault",
-            "name": "Default Task",
-            "category": "default",
-            "description": "Default Task",
-            "version": "1.0.0",
-            "command": "task_default.py",
-            "args": [
-                "1",
-                "2"
-            ]
-        },
         "TaskA": {
             "id": "TaskA",
             "name": "Task A",
@@ -23,15 +11,6 @@
                 "11",
                 "12"
             ]
-        },
-        "TaskB": {
-            "id": "TaskB",
-            "name": "Task B",
-            "category": "category_b",
-            "description": "Task B",
-            "version": "1.0.0",
-            "command": "category_b/task_b.py",
-            "args": []
         }
     },
     "Profile": {
@@ -40,86 +19,26 @@
             "description": "Sample plan 01a",
             "execution-mode": "parallel",
             "plugins": [
-                "TaskA",
-                "TaskB",
                 "TaskA"
             ]
         }
     }
 }
-2025-02-26 16:39:05 - INFO - --- [Profile]: profile_01a | [Execution Mode]: parallel
-2025-02-26 16:39:05 - DEBUG - Using selector: KqueueSelector
-2025-02-26 16:39:05 - INFO - ---------------------------------------------------------
-2025-02-26 16:39:05 - INFO - --- [Execute Task]: TaskA
-2025-02-26 16:39:05 - INFO - --- [Task Class]: <class 'task.plugins.category_a.task_a.TaskA'>
-2025-02-26 16:39:05 - INFO - Task A is running. args: ['11', '12']
-2025-02-26 16:39:05 - INFO - [Result Message]: {
+2025-02-26 17:03:57 - INFO - --- [Profile]: profile_01a | [Execution Mode]: parallel
+2025-02-26 17:03:57 - DEBUG - Using selector: KqueueSelector
+2025-02-26 17:03:57 - INFO - ----------- [Execute Task]: TaskA -----------
+2025-02-26 17:03:57 - INFO - --- [Task Class]: <class 'task.plugins.category_a.task_a.TaskA'>
+2025-02-26 17:03:57 - INFO - Task A is running. args: ['11', '12']
+2025-02-26 17:03:57 - INFO - [Result Message]: {
     "status": "SUCCESS",
     "message": "Task A is done",
     "data": {
         "return_value": "11 12 "
     }
 }
-2025-02-26 16:39:05 - INFO - ---------------------------------------------------------
-2025-02-26 16:39:05 - INFO - --- [Execute Task]: TaskB
-2025-02-26 16:39:05 - INFO - --- [Task Class]: <class 'task.plugins.category_b.task_b.TaskB'>
-2025-02-26 16:39:05 - INFO - Task B is running. args: []
-2025-02-26 16:39:05 - INFO - [Result Message]: {
-    "status": "SUCCESS",
-    "message": "Task B is done",
-    "data": {
-        "return_value": "234"
-    }
-}
-2025-02-26 16:39:05 - INFO - ---------------------------------------------------------
-2025-02-26 16:39:05 - INFO - --- [Execute Task]: TaskA
-2025-02-26 16:39:05 - INFO - --- [Task Class]: <class 'task.plugins.category_a.task_a.TaskA'>
-2025-02-26 16:39:05 - INFO - Task A is running. args: ['11', '12']
-2025-02-26 16:39:05 - INFO - [Result Message]: {
-    "status": "SUCCESS",
-    "message": "Task A is done",
-    "data": {
-        "return_value": "11 12 "
-    }
-}
-2025-02-26 16:39:05 - INFO - Result Message:  {
+2025-02-26 17:03:57 - INFO - Result Message:  {
     "status": "SUCCESS",
     "tasks": [
-        {
-            "id": "TaskA",
-            "name": "Task A",
-            "category": "category_a",
-            "description": "Task A",
-            "version": "1.0.0",
-            "command": "category_a/task_a.py",
-            "args": [
-                "11",
-                "12"
-            ],
-            "result_message": {
-                "status": "SUCCESS",
-                "message": "Task A is done",
-                "data": {
-                    "return_value": "11 12 "
-                }
-            }
-        },
-        {
-            "id": "TaskB",
-            "name": "Task B",
-            "category": "category_b",
-            "description": "Task B",
-            "version": "1.0.0",
-            "command": "category_b/task_b.py",
-            "args": [],
-            "result_message": {
-                "status": "SUCCESS",
-                "message": "Task B is done",
-                "data": {
-                    "return_value": "234"
-                }
-            }
-        },
         {
             "id": "TaskA",
             "name": "Task A",

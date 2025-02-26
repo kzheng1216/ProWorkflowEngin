@@ -2,7 +2,6 @@ from copy import deepcopy
 import json
 import yaml
 import os
-
 from task.common.logger import get_logger
 from task.common.utils import SERVICE_NAME, ExecutionMode, singleton
 logger = get_logger(SERVICE_NAME)
@@ -54,7 +53,9 @@ class TaskConfig:
 
     def get_execution_mode(self, profile_name: str) -> ExecutionMode:
         profile_inst = self.config['Profile'][profile_name]   
-        if not profile_inst or not profile_inst['execution-mode'] or profile_inst['execution-mode'] == ExecutionMode.SEQUENTIAL.value:
+        if not profile_inst \
+            or not profile_inst['execution-mode'] \
+            or profile_inst['execution-mode'] == ExecutionMode.SEQUENTIAL.value:
             return ExecutionMode.SEQUENTIAL
         return ExecutionMode.PARALLEL
 
