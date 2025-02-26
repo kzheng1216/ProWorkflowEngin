@@ -3,12 +3,8 @@ import json
 import yaml
 import os
 from task.common.logger import get_logger
-from task.common.utils import SERVICE_NAME, ExecutionMode, singleton
+from task.common.utils import PROFILE_DIR, SERVICE_NAME, YAML_TASK_DEFINITION, ExecutionMode, singleton
 logger = get_logger(SERVICE_NAME)
-
-base_dir = os.path.dirname(os.path.abspath(__file__))
-yaml_task_definition = os.path.join(base_dir, '../conf/', 'task_definition.yaml')
-profile_dir = f'{base_dir}/../conf/profile/'
 
 
 @singleton
@@ -20,7 +16,7 @@ class TaskConfig:
 
     def load_conf(self):
         # Load task definition
-        with open(yaml_task_definition, 'r') as f:
+        with open(YAML_TASK_DEFINITION, 'r') as f:
             task_definition_data = yaml.safe_load(f)
             task_dfs = task_definition_data['task_definition']
             t = {}
@@ -30,8 +26,8 @@ class TaskConfig:
 
         # Load profile
         self.config['Profile'] = {}
-        for item in os.listdir(profile_dir):
-            item_path = os.path.join(profile_dir, item)
+        for item in os.listdir(PROFILE_DIR):
+            item_path = os.path.join(PROFILE_DIR, item)
             if os.path.isfile(item_path):
                 with open(item_path, 'r') as f:
                     profile_data = yaml.safe_load(f)

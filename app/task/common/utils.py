@@ -3,7 +3,13 @@ import os
 
 SERVICE_NAME = "TaskService"
 
-# LOG
+# Config file path
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+YAML_TASK_DEFINITION = os.path.join(BASE_DIR, '../conf/', 'task_definition.yaml')
+PROFILE_DIR = f'{BASE_DIR}/../conf/profile/'
+
+
+# Log config
 LOGGING_LEVEL = os.environ.get('LOGGING_LEVEL', 'INFO')
 LOGGING_FORMAT = '%(asctime)s [%(levelname)s] <%(threadName)s:%(thread)d> %(filename)s %(funcName)s() (%(lineno)d): %(message)s'
 
