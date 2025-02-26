@@ -4,22 +4,12 @@ import yaml
 import os
 
 from task.common.logger import get_logger
-from task.common.utils import SERVICE_NAME, ExecutionMode
+from task.common.utils import SERVICE_NAME, ExecutionMode, singleton
 logger = get_logger(SERVICE_NAME)
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
-yaml_task_definition = os.path.join(base_dir, '', 'task_definition.yaml')
-profile_dir = f'{base_dir}/profile/'
-
-
-def singleton(cls):
-    instances = {}
-
-    def get_instance(*args, **kwargs):
-        if cls not in instances:
-            instances[cls] = cls(*args, **kwargs)
-        return instances[cls]
-    return get_instance
+yaml_task_definition = os.path.join(base_dir, '../conf/', 'task_definition.yaml')
+profile_dir = f'{base_dir}/../conf/profile/'
 
 
 @singleton
@@ -50,7 +40,7 @@ class TaskConfig:
 
         logger.info(f'Load task config: {json.dumps(self.config, indent=4)}')
     
-    def get_task_definitions_by_profile_name(self, profile_name: str) -> list:
+    def get_tasks(self, profile_name: str) -> list:
         task_definitions = []
         profile_inst = self.config['Profile'][profile_name]
         if not profile_inst or not profile_inst['plugins']:
@@ -59,7 +49,7 @@ class TaskConfig:
             task_definitions.append(self.config['Task'][plugin])
         return task_definitions
 
-    def get_execution_mode_by_profile_name(self, profile_name: str) -> ExecutionMode:
+    def get_execution_mode(self, profile_name: str) -> ExecutionMode:
         profile_inst = self.config['Profile'][profile_name]   
         if not profile_inst or not profile_inst['execution-mode'] or profile_inst['execution-mode'] == ExecutionMode.SEQUENTIAL.value:
             return ExecutionMode.SEQUENTIAL

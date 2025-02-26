@@ -6,7 +6,6 @@ from task.common.utils import LOGGING_LEVEL, LOGGING_FORMAT
 def get_logger(name):
     # 检查 logs 目录是否存在，如果不存在则创建
     current_file_path = os.path.abspath(__file__).replace('logger.py', '../../..')
-    print(current_file_path)
     log_dir = f'{current_file_path}/logs'
     
     if not os.path.exists(log_dir):

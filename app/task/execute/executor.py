@@ -3,7 +3,7 @@ from copy import deepcopy
 import json
 import yaml
 import importlib
-from task.conf.task_config import TaskConfig
+from task.execute.task_config import TaskConfig
 from task.common.utils import State
 from task.common.utils import SERVICE_NAME, ExecutionMode
 from task.common.logger import get_logger
@@ -11,23 +11,24 @@ from task.common.logger import get_logger
 logger = get_logger(SERVICE_NAME)
 
 
-class BaseExecutor:
+class Executor:
     config = TaskConfig()
-    profile = 'default'
-    task_list = []
-    execution_mode = ExecutionMode.SEQUENTIAL
+    tasks = []
+    mode = ExecutionMode.SEQUENTIAL
 
     total_result_message = {
         "status": State.NEW.value,
         "tasks": [],
     }
 
-    def __init__(self, profile : str = 'default'):
-        self.profile = profile
-        self.task_list = self.config.get_task_definitions_by_profile_name(self.profile)
-        self.execution_mode = self.config.get_execution_mode_by_profile_name(self.profile)
+    def __init__(self, profile_name : str = 'default'):
+        self.tasks = self.config.get_tasks(profile_name)
+        self.mode = self.config.get_execution_mode(profile_name)
+        logger.info(
+            f"### === [Profile]: {profile_name} | [Execution Mode]: {self.mode.value}")
 
-    def executor_module(self, task_data: dict) -> dict:
+    
+    def execute_task(self, task_data: dict) -> dict:
         logger.info(f'---------------------------------------------------------')
         task_id = task_data["id"]
         logger.info(f'--- [Execute Task]: {task_id}')
@@ -52,14 +53,14 @@ class BaseExecutor:
         logger.info(f'[Result Message]: {json.dumps(result_message, indent=4)}')
         return result_message
     
-    def result(self):
-        if not self.task_list:
+    def handle_result(self):
+        if not self.tasks:
             self.result_message['status'] = State.ERROR.value
             return
 
-        self.total_result_message['tasks'] = self.task_list
+        self.total_result_message['tasks'] = self.tasks
         
-        for task in self.task_list:    
+        for task in self.tasks:
             if task['result_message']['status'] == State.FAIL.value:
                 self.total_result_message['status'] = State.FAIL.value
                 return
@@ -71,3 +72,35 @@ class BaseExecutor:
             
     def get_result(self):
         return self.total_result_message
+
+    def run_parallel(self):
+        loop = asyncio.get_event_loop()
+        tasks = [loop.create_task(self.executor_module_async(t))
+                 for t in self.tasks]
+
+        try:
+            loop.run_until_complete(asyncio.gather(*tasks))
+        except Exception as e:
+            logger.error(f"executor_parallel error: {e}")
+        loop.close()
+
+        self.tasks = [task.result() for task in tasks]
+        self.handle_result()
+
+    async def executor_module_async(self, task_data: dict) -> dict:
+        task_data["result_message"] = self.execute_task(task_data)
+        return task_data
+
+    def run_sequential(self):
+        for t in self.tasks:
+            t["result_message"] = self.execute_task(t)
+        self.handle_result()
+
+    def run(self):
+        try:
+            if self.mode == ExecutionMode.PARALLEL:
+                self.run_parallel()
+            else:
+                self.run_sequential()
+        except Exception as e:
+            logger.error(f"Error occur during execution: {e}")

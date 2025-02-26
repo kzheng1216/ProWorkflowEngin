@@ -1,4 +1,4 @@
-2025-02-21 11:26:31 - INFO - Load task config: {
+2025-02-26 14:49:19 - INFO - Load task config: {
     "Task": {
         "TaskDefault": {
             "id": "TaskDefault",
@@ -53,41 +53,41 @@
         }
     }
 }
-2025-02-21 11:26:31 - INFO - ### === [Profile]: profile_01a | [Execution Mode]: sequential
-2025-02-21 11:26:31 - INFO - ---------------------------------------------------------
-2025-02-21 11:26:31 - INFO - --- [Execute Task]: TaskA
-2025-02-21 11:26:31 - INFO - --- [Task Class]: <class 'task.plugins.category_a.task_a.TaskA'>
-2025-02-21 11:26:31 - INFO - Task A is running. args: ['11', '12']
-2025-02-21 11:26:31 - INFO - [Result Message]: {
+2025-02-26 14:49:19 - INFO - ### === [Profile]: profile_01a | [Execution Mode]: sequential
+2025-02-26 14:49:19 - INFO - ---------------------------------------------------------
+2025-02-26 14:49:19 - INFO - --- [Execute Task]: TaskA
+2025-02-26 14:49:19 - INFO - --- [Task Class]: <class 'task.plugins.category_a.task_a.TaskA'>
+2025-02-26 14:49:19 - INFO - Task A is running. args: ['11', '12']
+2025-02-26 14:49:19 - INFO - [Result Message]: {
     "status": "SUCCESS",
     "message": "Task A is done",
     "data": {
         "return_value": "11 12 "
     }
 }
-2025-02-21 11:26:31 - INFO - ---------------------------------------------------------
-2025-02-21 11:26:31 - INFO - --- [Execute Task]: TaskB
-2025-02-21 11:26:31 - INFO - --- [Task Class]: <class 'task.plugins.category_b.task_b.TaskB'>
-2025-02-21 11:26:31 - INFO - Task B is running. args: []
-2025-02-21 11:26:31 - INFO - [Result Message]: {
+2025-02-26 14:49:19 - INFO - ---------------------------------------------------------
+2025-02-26 14:49:19 - INFO - --- [Execute Task]: TaskB
+2025-02-26 14:49:19 - INFO - --- [Task Class]: <class 'task.plugins.category_b.task_b.TaskB'>
+2025-02-26 14:49:19 - INFO - Task B is running. args: []
+2025-02-26 14:49:19 - INFO - [Result Message]: {
     "status": "SUCCESS",
     "message": "Task B is done",
     "data": {
         "return_value": "234"
     }
 }
-2025-02-21 11:26:31 - INFO - ---------------------------------------------------------
-2025-02-21 11:26:31 - INFO - --- [Execute Task]: TaskA
-2025-02-21 11:26:31 - INFO - --- [Task Class]: <class 'task.plugins.category_a.task_a.TaskA'>
-2025-02-21 11:26:31 - INFO - Task A is running. args: ['11', '12']
-2025-02-21 11:26:31 - INFO - [Result Message]: {
+2025-02-26 14:49:19 - INFO - ---------------------------------------------------------
+2025-02-26 14:49:19 - INFO - --- [Execute Task]: TaskA
+2025-02-26 14:49:19 - INFO - --- [Task Class]: <class 'task.plugins.category_a.task_a.TaskA'>
+2025-02-26 14:49:19 - INFO - Task A is running. args: ['11', '12']
+2025-02-26 14:49:19 - INFO - [Result Message]: {
     "status": "SUCCESS",
     "message": "Task A is done",
     "data": {
         "return_value": "11 12 "
     }
 }
-2025-02-21 11:26:31 - INFO - Result Message:  {
+2025-02-26 14:49:19 - INFO - Result Message:  {
     "status": "SUCCESS",
     "tasks": [
         {
