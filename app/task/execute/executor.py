@@ -21,13 +21,15 @@ class Executor:
         "tasks": [],
     }
 
-    def __init__(self, profile_name : str = 'default'):
+    def __init__(self, profile_name : str):
         self.tasks = self.config.get_tasks(profile_name)
+        if not self.tasks:
+            logger.warning(
+                f"'{profile_name}' may be not defined or no tasks found for this profile")
+            return
         self.mode = self.config.get_execution_mode(profile_name)
-        logger.info(
-            f"### === [Profile]: {profile_name} | [Execution Mode]: {self.mode.value}")
+        logger.info(f"--- [Profile]: {profile_name} | [Execution Mode]: {self.mode.value}")
 
-    
     def execute_task(self, task_data: dict) -> dict:
         logger.info(f'---------------------------------------------------------')
         task_id = task_data["id"]
@@ -97,6 +99,9 @@ class Executor:
         self.handle_result()
 
     def run(self):
+        if not self.tasks:
+            logger.warning(f"No tasks to execute")
+            return
         try:
             if self.mode == ExecutionMode.PARALLEL:
                 self.run_parallel()

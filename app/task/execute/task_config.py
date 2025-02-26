@@ -42,6 +42,9 @@ class TaskConfig:
     
     def get_tasks(self, profile_name: str) -> list:
         task_definitions = []
+        if not self.config['Profile'].__contains__(profile_name):
+            return []
+        
         profile_inst = self.config['Profile'][profile_name]
         if not profile_inst or not profile_inst['plugins']:
             return []
