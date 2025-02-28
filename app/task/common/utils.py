@@ -14,6 +14,7 @@ LOGGING_LEVEL = os.environ.get('LOGGING_LEVEL', 'INFO')
 LOGGING_FORMAT = '%(asctime)s [%(levelname)s] <%(threadName)s:%(thread)d> %(filename)s %(funcName)s() (%(lineno)d): %(message)s'
 
 
+
 class State(Enum):
     NEW = "NEW"
     READY = "READY"
@@ -36,3 +37,4 @@ def singleton(cls):
             instances[cls] = cls(*args, **kwargs)
         return instances[cls]
     return get_instance
+

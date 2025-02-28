@@ -2,34 +2,37 @@ import asyncio
 from copy import deepcopy
 import json
 import importlib
+
 from task.execute.task_config import TaskConfig
 from task.common.utils import State
 from task.common.utils import SERVICE_NAME, ExecutionMode
 from task.common.logger import get_logger
 
+
 logger = get_logger(SERVICE_NAME)
 
 
 class Executor:
-    config = TaskConfig()
-    tasks = []
-    mode = ExecutionMode.SEQUENTIAL
-
-    total_result_message = {
-        "status": State.NEW.value,
-        "tasks": [],
-    }
-
     def __init__(self, profile_name : str):
+        self.config = TaskConfig()
+        self.total_result_message = {
+            "status": State.NEW.value,
+            "tasks": [],
+        }
+        
+        # Get tasks from config
         self.tasks = self.config.get_tasks(profile_name)
         if not self.tasks:
-            logger.warning(
-                f"'{profile_name}' may be not defined or no tasks found for this profile")
+            logger.warning(f"'{profile_name}' may be not defined or no tasks found for this profile")
             return
+        
+        # Get execution mode from config
         self.mode = self.config.get_execution_mode(profile_name)
+        
         logger.info(f"--- [Profile]: {profile_name} | [Execution Mode]: {self.mode.value}")
 
-    def execute_task(self, task_data: dict) -> dict:
+    @staticmethod
+    def execute_task(task_data: dict) -> dict:
         task_id = task_data["id"]
         logger.info(f'----------- [Execute Task]: {task_id} -----------')
         # logger.info(f'task_data: {json.dumps(task_data, indent=4)}')
@@ -81,12 +84,12 @@ class Executor:
         
 
     async def executor_module_async(self, task_data: dict) -> dict:
-        task_data["result_message"] = self.execute_task(task_data)
+        task_data["result_message"] = Executor.execute_task(task_data)
         return task_data
 
     def run_sequential(self):
         for t in self.tasks:
-            t["result_message"] = self.execute_task(t)
+            t["result_message"] = Executor.execute_task(t)
 
     def run(self):
         if not self.tasks:

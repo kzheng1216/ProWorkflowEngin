@@ -1,5 +1,5 @@
 profile: profile_01a
 description: "Sample plan 01a"
-execution-mode: parallel # sequential/parallel
+execution-mode: sequential # sequential/parallel
 plugins:
   - TaskA

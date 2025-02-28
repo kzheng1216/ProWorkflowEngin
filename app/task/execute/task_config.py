@@ -9,29 +9,32 @@ logger = get_logger(SERVICE_NAME)
 
 @singleton
 class TaskConfig:
-    config = {}
-
     def __init__(self):
+        self.config = {}
         self.load_conf()
 
     def load_conf(self):
-        # Load task definition
-        with open(YAML_TASK_DEFINITION, 'r') as f:
-            task_definition_data = yaml.safe_load(f)
-            task_dfs = task_definition_data['task_definition']
-            t = {}
-            for t_dfs in task_dfs:
-                t[t_dfs['id']] = t_dfs
-            self.config['Task'] = t
+        try:
+            # Load task definition
+            with open(YAML_TASK_DEFINITION, 'r') as f:
+                data = yaml.safe_load(f)
+                if data.__contains__('task_definition'):
+                    self.config['Task'] = {t_dfs['id']: t_dfs for t_dfs in data['task_definition']}
+                else:
+                    self.config['Task'] = {}
 
-        # Load profile
-        self.config['Profile'] = {}
-        for item in os.listdir(PROFILE_DIR):
-            item_path = os.path.join(PROFILE_DIR, item)
-            if os.path.isfile(item_path):
+            # Load profile
+            self.config['Profile'] = {}
+            for item in os.listdir(PROFILE_DIR):
+                item_path = os.path.join(PROFILE_DIR, item)
+                if not os.path.isfile(item_path):
+                    continue
                 with open(item_path, 'r') as f:
-                    profile_data = yaml.safe_load(f)
-                    self.config['Profile'][profile_data['profile']] = profile_data
+                    data = yaml.safe_load(f)
+                    self.config['Profile'][data['profile']] = data
+                        
+        except Exception as e:
+            logger.error(f'Load task config failed: {e}')
 
         logger.info(f'Load task config: {json.dumps(self.config, indent=4)}')
     

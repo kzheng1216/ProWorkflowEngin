@@ -1,4 +1,4 @@
-2025-02-26 17:08:10 - INFO - Load task config: {
+2025-02-28 16:55:18 - INFO - Load task config: {
     "Task": {
         "TaskA": {
             "id": "TaskA",
@@ -17,26 +17,25 @@
         "profile_01a": {
             "profile": "profile_01a",
             "description": "Sample plan 01a",
-            "execution-mode": "parallel",
+            "execution-mode": "sequential",
             "plugins": [
                 "TaskA"
             ]
         }
     }
 }
-2025-02-26 17:08:10 - INFO - --- [Profile]: profile_01a | [Execution Mode]: parallel
-2025-02-26 17:08:10 - DEBUG - Using selector: KqueueSelector
-2025-02-26 17:08:10 - INFO - ----------- [Execute Task]: TaskA -----------
-2025-02-26 17:08:10 - INFO - --- [Task Class]: <class 'task.plugins.category_a.task_a.TaskA'>
-2025-02-26 17:08:10 - INFO - Task A is running. args: ['11', '12']
-2025-02-26 17:08:10 - INFO - [Result Message]: {
+2025-02-28 16:55:18 - INFO - --- [Profile]: profile_01a | [Execution Mode]: sequential
+2025-02-28 16:55:18 - INFO - ----------- [Execute Task]: TaskA -----------
+2025-02-28 16:55:18 - INFO - --- [Task Class]: <class 'task.plugins.category_a.task_a.TaskA'>
+2025-02-28 16:55:18 - INFO - Task A is running. args: ['11', '12']
+2025-02-28 16:55:18 - INFO - [Result Message]: {
     "status": "SUCCESS",
     "message": "Task A is done",
     "data": {
         "return_value": "11 12 "
     }
 }
-2025-02-26 17:08:10 - INFO - Result Message:  {
+2025-02-28 16:55:18 - INFO - Result Message:  {
     "status": "SUCCESS",
     "tasks": [
         {
